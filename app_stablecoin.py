@@ -293,8 +293,7 @@ def view_landing():
             st.markdown(f"<div class='x-left'><div class='x-brand'></div></div>", unsafe_allow_html=True)
         with c3:
             # 右上角：语言切换 + 登录按钮
-            st.selectbox(t("lang"), ["ZH","EN"], index=["ZH","EN"].index(st.session_state["lang"]),
-                         key="lang", label_visibility="collapsed")
+            lang_selector()
             if st.button(t("login_btn"), use_container_width=True):
                 st.session_state.route = "auth"
                 st.rerun()
@@ -313,8 +312,7 @@ def view_app():
         with c1: st.image("logo.png", use_column_width=True)
         with c2: st.markdown(f"<div class='x-brand'></div>", unsafe_allow_html=True)
         with c3:
-            st.selectbox(t("lang"), ["ZH","EN"], index=["ZH","EN"].index(st.session_state["lang"]),
-                         key="lang", label_visibility="collapsed")
+            lang_selector()
             if st.button(t("signout"), use_container_width=True):
                 st.session_state.auth = {"logged_in": False, "email": None}
                 st.session_state.route = "landing"
