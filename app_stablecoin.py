@@ -198,6 +198,21 @@ def inject_css():
     </style>
     """, unsafe_allow_html=True)
 
+# --- language selector helper (place ABOVE any usage) ---
+def lang_selector(label_text=""):
+    """
+    稳妥的语言切换器：
+    - 读取当前 session_state['lang']（默认 ZH）
+    - 用户改变后手动写回，再 st.rerun() 立即生效
+    """
+    options = ["ZH", "EN"]
+    st.session_state.setdefault("lang", "ZH")
+    idx = options.index(st.session_state["lang"])
+    new_lang = st.selectbox(label_text or "Language", options, index=idx, label_visibility="collapsed")
+    if new_lang != st.session_state["lang"]:
+        st.session_state["lang"] = new_lang
+        st.rerun()
+
 # -------------- util --------------
 def today_rate_version():
     now = dt.datetime.utcnow()
