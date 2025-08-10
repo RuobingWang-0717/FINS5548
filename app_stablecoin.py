@@ -66,7 +66,7 @@ I18N = {
     "EN": {
         "slogan": "One-click transfer, cross-currency seamless delivery",
         "landing_sub": "Demo only. Data resets on refresh.",
-        "login_btn": "Sign in",
+        "login_btn": "Log in",
         "signin": "Sign in",
         "signup": "Sign up",
         "email": "Email",
