@@ -418,7 +418,7 @@ def view_app():
         st.info(t("rate_info").format(src=src, rate=rate, dst=dst, fee_pct=FEE*100, fee=fee, ver=st.session_state.rate_version))
 
         can = (src != dst) and amt > 0 and amt <= balances[src]
-        if st.button(t("swap_btn"), type="primary", use_column_width=True, disabled=not can):
+        if st.button(t("swap_btn"), type="primary", use_container_width=True, disabled=not can):
             balances[src] -= amt
             balances[dst] += out
             st.session_state.balances = balances
