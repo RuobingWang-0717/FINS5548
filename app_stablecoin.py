@@ -295,7 +295,7 @@ def view_landing():
             # 右上角：语言切换 + 登录按钮
             st.selectbox(t("lang"), ["ZH","EN"], index=["ZH","EN"].index(st.session_state["lang"]),
                          key="lang", label_visibility="collapsed")
-            if st.button(t("login_btn"), use_column_width=True):
+            if st.button(t("login_btn"), use_container_width=True):
                 st.session_state.route = "auth"
                 st.rerun()
 
