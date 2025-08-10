@@ -368,7 +368,7 @@ def view_app():
 
         can_send = (amount > 0) and (amount <= st.session_state.balances[asset]) and (len(to_acct) >= 3)
         btn_label = t("send") if not cross else "提交转账（含兑币）"
-        if st.button(btn_label, type="primary", use_column_width=True, disabled=not can_send, key="xfer_btn"):
+        if st.button(btn_label, type="primary", use_container_width=True, disabled=not can_send, key="xfer_btn"):
             time.sleep(0.15)  # 模拟 ≤200ms 确认
 
             # 扣减发起人余额
