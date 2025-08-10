@@ -432,7 +432,7 @@ def view_app():
         if df.empty:
             st.info(t("no_activity"))
         else:
-            st.dataframe(df, use_column_width=True, height=360)
+            st.dataframe(df, use_container_width=True, height=360)
             st.download_button(t("download"), df.to_csv(index=False).encode(), file_name="xpay_history.csv")
 
     # --- Settings ---
