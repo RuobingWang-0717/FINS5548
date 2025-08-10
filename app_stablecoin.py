@@ -233,7 +233,7 @@ def add_history(kind, asset_from, asset_to, amount_in, amount_out, fee, cpty="",
 def stat_card(label, value, hint=""):
     st.markdown(
         f"<div class='card'><div style='font-size:13px; color:#D5DFEA;'>{label}</div>"
-        f"<div style='font-size:22px; font-weight:800; margin-top:4px; color:"#F9FAFB";'>{value}</div>"
+        f"<div style='font-size:22px; font-weight:800; margin-top:4px; color:#F9FAFB;'>{value}</div>"
         f"<div class='muted'>{hint}</div></div>",
         unsafe_allow_html=True,
     )
@@ -257,7 +257,7 @@ def view_auth():
     with tabs[0]:
         email = st.text_input(t("email"), value="demo@xpay.io")
         pwd = st.text_input(t("password"), type="password", value="demo123")
-        if st.button(t("signin"), use_container_width=True, type="primary"):
+        if st.button(t("signin"), use_column_width=True, type="primary"):
             users = st.session_state.users
             if email in users and users[email]["password"] == pwd:
                 st.session_state.auth = {"logged_in": True, "email": email}
@@ -272,7 +272,7 @@ def view_auth():
         pwd3 = st.text_input(t("confirm_pwd") + " *", type="password", key="reg_pwd2")
         agree = st.checkbox(t("agree"))
         ok = email2 and pwd2 and pwd3 and (pwd2 == pwd3) and agree
-        if st.button(t("signup"), use_container_width=True, type="primary", disabled=not ok):
+        if st.button(t("signup"), use_column_width=True, type="primary", disabled=not ok):
             users = st.session_state.users
             if email2 in users:
                 st.error(t("exists"))
@@ -288,14 +288,14 @@ def view_landing():
     with top:
         c1, c2, c3 = st.columns([0.08, 0.74, 0.18])
         with c1:
-            st.image("logo.png", use_container_width=True)
+            st.image("logo.png", use_column_width=True)
         with c2:
             st.markdown(f"<div class='x-left'><div class='x-brand'></div></div>", unsafe_allow_html=True)
         with c3:
             # 右上角：语言切换 + 登录按钮
             st.selectbox(t("lang"), ["ZH","EN"], index=["ZH","EN"].index(st.session_state["lang"]),
                          key="lang", label_visibility="collapsed")
-            if st.button(t("login_btn"), use_container_width=True):
+            if st.button(t("login_btn"), use_column_width=True):
                 st.session_state.route = "auth"
                 st.rerun()
 
@@ -310,12 +310,12 @@ def view_app():
     top = st.container()
     with top:
         c1, c2, c3 = st.columns([0.08, 0.72, 0.20])
-        with c1: st.image("logo.png", use_container_width=True)
+        with c1: st.image("logo.png", use_column_width=True)
         with c2: st.markdown(f"<div class='x-brand'></div>", unsafe_allow_html=True)
         with c3:
             st.selectbox(t("lang"), ["ZH","EN"], index=["ZH","EN"].index(st.session_state["lang"]),
                          key="lang", label_visibility="collapsed")
-            if st.button(t("signout"), use_container_width=True):
+            if st.button(t("signout"), use_column_width=True):
                 st.session_state.auth = {"logged_in": False, "email": None}
                 st.session_state.route = "landing"
                 st.rerun()
@@ -368,7 +368,7 @@ def view_app():
 
         can_send = (amount > 0) and (amount <= st.session_state.balances[asset]) and (len(to_acct) >= 3)
         btn_label = t("send") if not cross else "提交转账（含兑币）"
-        if st.button(btn_label, type="primary", use_container_width=True, disabled=not can_send, key="xfer_btn"):
+        if st.button(btn_label, type="primary", use_column_width=True, disabled=not can_send, key="xfer_btn"):
             time.sleep(0.15)  # 模拟 ≤200ms 确认
 
             # 扣减发起人余额
@@ -418,7 +418,7 @@ def view_app():
         st.info(t("rate_info").format(src=src, rate=rate, dst=dst, fee_pct=FEE*100, fee=fee, ver=st.session_state.rate_version))
 
         can = (src != dst) and amt > 0 and amt <= balances[src]
-        if st.button(t("swap_btn"), type="primary", use_container_width=True, disabled=not can):
+        if st.button(t("swap_btn"), type="primary", use_column_width=True, disabled=not can):
             balances[src] -= amt
             balances[dst] += out
             st.session_state.balances = balances
@@ -432,7 +432,7 @@ def view_app():
         if df.empty:
             st.info(t("no_activity"))
         else:
-            st.dataframe(df, use_container_width=True, height=360)
+            st.dataframe(df, use_column_width=True, height=360)
             st.download_button(t("download"), df.to_csv(index=False).encode(), file_name="xpay_history.csv")
 
     # --- Settings ---
@@ -448,7 +448,7 @@ def view_app():
         if st.button(t("regen")):
             st.session_state.rates = build_rates()
             st.session_state.rate_version = today_rate_version()
-            st.experimental_rerun()
+            st.rerun()
 
 # -------------- main --------------
 st.set_page_config(page_title=f"{APP_NAME} Demo", page_icon="💸", layout="wide")
