@@ -257,7 +257,7 @@ def view_auth():
     with tabs[0]:
         email = st.text_input(t("email"), value="demo@xpay.io")
         pwd = st.text_input(t("password"), type="password", value="demo123")
-        if st.button(t("signin"), use_column_width=True, type="primary"):
+        if st.button(t("signin"), use_container_width=True, type="primary"):
             users = st.session_state.users
             if email in users and users[email]["password"] == pwd:
                 st.session_state.auth = {"logged_in": True, "email": email}
