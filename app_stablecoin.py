@@ -310,7 +310,7 @@ def view_app():
     top = st.container()
     with top:
         c1, c2, c3 = st.columns([0.08, 0.72, 0.20])
-        with c1: st.image("logo.png", use_container_width=True)
+        with c1: st.image("logo.png", use_column_width=True)
         with c2: st.markdown(f"<div class='x-brand'></div>", unsafe_allow_html=True)
         with c3:
             st.selectbox(t("lang"), ["ZH","EN"], index=["ZH","EN"].index(st.session_state["lang"]),
