@@ -272,7 +272,7 @@ def view_auth():
         pwd3 = st.text_input(t("confirm_pwd") + " *", type="password", key="reg_pwd2")
         agree = st.checkbox(t("agree"))
         ok = email2 and pwd2 and pwd3 and (pwd2 == pwd3) and agree
-        if st.button(t("signup"), use_column_width=True, type="primary", disabled=not ok):
+        if st.button(t("signup"), use_container_width=True, type="primary", disabled=not ok):
             users = st.session_state.users
             if email2 in users:
                 st.error(t("exists"))
